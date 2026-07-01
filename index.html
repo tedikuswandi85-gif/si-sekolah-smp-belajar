@@ -1,11 +1,3 @@
-<read_file>
-<path>index.html
-</path>
-<limit>
-100
-</limit>
-</read_file>
-
 <write_file>
 <path>index.html
 </path>
@@ -372,7 +364,7 @@ function formatDate(d) { if (!d) return '-'; return new Date(d).toLocaleDateStri
 function formatDateTime(d) { if (!d) return '-'; return new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }); }
 function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2, 9); }
 
-// Hash password dengan SHA-256 (basic security)
+// Hash password dengan SHA-256
 async function hashPassword(password) {
 const encoder = new TextEncoder();
 const data = encoder.encode(password);
@@ -571,7 +563,7 @@ showLoginError(errorMsg);
 // ==========================================
 // INITIALIZATION
 // ==========================================
-function initializeApp() {
+async function initializeApp() {
 console.log('🚀 Initializing app...');
 console.log('Firebase configured:', isFirebaseConfigured);
 
@@ -581,7 +573,7 @@ console.log('Demo mode - data loaded');
 
 // Create demo admin user
 if (!appData.users.find(u => u.username === 'admin')) {
-hashPassword('admin123').then(hashed => {
+const hashed = await hashPassword('admin123');
 appData.users.push({
 id: 'demo-admin',
 uid: 'demo-admin',
@@ -596,7 +588,6 @@ mapel: null,
 loginType: 'username'
 });
 saveDemoData();
-});
 }
 
 hideLoading();
@@ -1230,7 +1221,7 @@ ${MAPEL_LIST.map(m => `<option value="${m}" ${user.mapel === m ? 'selected' : ''
 </div>
 <div class="modal-footer">
 <button class="btn btn-outline" onclick="closeModal()">Batal</button>
-<button class="btn btn-primary" onclick="updateUser('${uid}')"><i class="fas fa-save"></i> Simpan</button>
+<button class="btn btn-primary" onclick="updateUser('${user.uid || user.id}')"><i class="fas fa-save"></i> Simpan</button>
 </div>
 `, 'large');
 }
