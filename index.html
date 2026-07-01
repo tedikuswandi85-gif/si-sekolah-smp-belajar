@@ -1,5 +1,14 @@
+<read_file>
+<path>index.html
+</path>
+<limit>
+50
+</limit>
+</read_file>
+
 <write_file>
-<path>index.html</path>
+<path>index.html
+</path>
 <content><!DOCTYPE html>
 <html lang="id">
 <head>
@@ -16,7 +25,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.3/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
-<!-- Firebase Compat SDK (BISA dijalankan dari file://) -->
+<!-- Firebase Compat SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -44,16 +53,40 @@ body{font-family:'Inter',sans-serif;background:var(--light);color:var(--dark);mi
 /* Login */
 .login-page{min-height:100vh;display:none;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px}
 .login-page.active{display:flex}
-.login-card{background:white;border-radius:20px;padding:40px;width:100%;max-width:450px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);text-align:center}
+.login-card{background:white;border-radius:20px;padding:40px;width:100%;max-width:480px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);text-align:center}
 .login-card .logo{width:80px;height:80px;background:linear-gradient(135deg,var(--primary),#0ea5e9);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 25px;font-size:36px;color:white}
 .login-card h1{font-size:22px;font-weight:700;margin-bottom:8px}
 .login-card p{color:var(--gray);margin-bottom:20px;font-size:14px}
+
+/* Login Tabs */
+.login-tabs{display:flex;background:#f1f5f9;padding:4px;border-radius:10px;margin-bottom:20px;gap:4px}
+.login-tab{flex:1;padding:10px;border:none;background:transparent;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;color:var(--gray)}
+.login-tab.active{background:white;color:var(--primary);box-shadow:var(--shadow)}
+
+.login-form{display:none}
+.login-form.active{display:block}
+
 .btn-google{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:14px 24px;border:2px solid var(--border);border-radius:10px;background:white;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s}
 .btn-google:hover{border-color:var(--primary);background:#f8f7ff;transform:translateY(-2px)}
+
 .login-info{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px;margin-top:20px;font-size:12px;color:#1e40af;text-align:left}
 .login-error{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px;margin-top:15px;font-size:12px;color:#991b1b;display:none}
 .pending-approval{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:20px;margin-top:15px;text-align:center;display:none}
 .pending-approval i{font-size:40px;color:var(--warning);margin-bottom:10px}
+
+/* Form Login */
+.form-group{margin-bottom:16px;text-align:left}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,70,229,0.1)}
+
+.btn-login{width:100%;padding:12px;background:var(--primary);color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn-login:hover{background:var(--primary-dark)}
+.btn-login:disabled{opacity:0.6;cursor:not-allowed}
+
+.password-toggle{position:relative}
+.password-toggle input{padding-right:40px}
+.password-toggle .toggle-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gray);padding:5px}
 
 /* App */
 .app-container{display:none;min-height:100vh}
@@ -140,10 +173,6 @@ table tr:hover{background:#f8fafc}
 .badge-gray{background:#f1f5f9;color:#475569}
 .badge-orange{background:#fff7ed;color:#ea580c}
 
-.form-group{margin-bottom:16px;text-align:left}
-.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,70,229,0.1)}
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 .form-group .required{color:var(--danger)}
 
@@ -232,6 +261,7 @@ table tr:hover{background:#f8fafc}
 .top-bar{padding:12px 15px}
 .top-bar h1{font-size:16px}
 .sidebar-footer{width:100%}
+.login-card{padding:30px 20px}
 }
 @media print{.sidebar,.top-bar,.btn,.modal-overlay,.toast-container{display:none !important}.main-content{margin-left:0}}
 </style>
@@ -251,22 +281,62 @@ table tr:hover{background:#f8fafc}
 <div class="logo"><i class="fas fa-graduation-cap"></i></div>
 <h1>Sistem Informasi Sekolah</h1>
 <p>SMP Belajar Id - Multi-User Real-Time</p>
+
+<!-- Login Tabs -->
+<div class="login-tabs">
+<button class="login-tab active" onclick="switchLoginTab('email', this)">
+<i class="fas fa-envelope"></i> Email
+</button>
+<button class="login-tab" onclick="switchLoginTab('google', this)">
+<i class="fab fa-google"></i> Google
+</button>
+</div>
+
+<!-- Email Login Form -->
+<div class="login-form active" id="emailLoginForm">
+<div class="form-group">
+<label><i class="fas fa-envelope"></i> Email</label>
+<input type="email" id="loginEmail" placeholder="nama@email.com">
+</div>
+<div class="form-group">
+<label><i class="fas fa-lock"></i> Password</label>
+<div class="password-toggle">
+<input type="password" id="loginPassword" placeholder="Masukkan password">
+<button type="button" class="toggle-btn" onclick="togglePassword('loginPassword', this)">
+<i class="fas fa-eye"></i>
+</button>
+</div>
+</div>
+<button class="btn-login" onclick="handleEmailLogin()" id="btnEmailLogin">
+<i class="fas fa-sign-in-alt"></i> Masuk
+</button>
+<div class="login-info" style="margin-top:15px">
+<strong>💡 Login dengan Email:</strong><br>
+• Gunakan email yang didaftarkan oleh admin<br>
+• Bisa email apa saja (gmail.com, yahoo.com, dll)<br>
+• Hubungi admin jika belum punya akun
+</div>
+</div>
+
+<!-- Google Login Form -->
+<div class="login-form" id="googleLoginForm">
 <button class="btn-google" onclick="handleGoogleLogin()">
 <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
 Masuk dengan Google
 </button>
 <div class="login-info">
-<strong>🔐 Hak Akses:</strong><br>
-• <strong>Super Admin</strong>: <code>tedikuswandi85@admin.smp.belajar.id</code><br>
-• <strong>Admin Sekolah</strong>: Email @admin.smp.belajar.id<br>
-• <strong>Walikelas & Guru</strong>: Email @smp.belajar.id<br><br>
-<small>⚠️ User baru perlu persetujuan Super Admin</small>
+<strong>🔐 Login dengan Google:</strong><br>
+• Email harus @smp.belajar.id atau @admin.smp.belajar.id<br>
+• Super Admin: <code>tedikuswandi85@admin.smp.belajar.id</code><br>
+• User baru perlu persetujuan admin
 </div>
+</div>
+
 <div class="login-error" id="loginError"></div>
 <div class="pending-approval" id="pendingApproval">
 <i class="fas fa-hourglass-half"></i>
 <h4 style="margin-bottom:8px">Akun Menunggu Persetujuan</h4>
-<p style="font-size:13px;color:var(--gray)">Akun Anda sedang menunggu persetujuan Super Admin.</p>
+<p style="font-size:13px;color:var(--gray)">Akun Anda sedang menunggu persetujuan admin.</p>
 <button class="btn btn-outline" onclick="handleLogout()" style="margin-top:12px">Keluar</button>
 </div>
 </div>
@@ -326,10 +396,8 @@ const SUPER_ADMIN_EMAIL = "tedikuswandi85@admin.smp.belajar.id";
 const ADMIN_DOMAIN = "admin.smp.belajar.id";
 const ALLOWED_DOMAIN = "smp.belajar.id";
 
-// Cek apakah config sudah diisi
 const isFirebaseConfigured = !firebaseConfig.apiKey.includes("GANTI_DENGAN");
 
-// Global state
 let firebaseApp = null, auth = null, db = null;
 let currentUser = null, currentUserData = null;
 let unsubscribers = [], currentPage = 'dashboard';
@@ -424,13 +492,127 @@ if (saved) Object.assign(appData, JSON.parse(saved));
 }
 
 // ==========================================
-// INITIALIZATION - PASTI BERJALAN
+// LOGIN TAB SWITCHER
+// ==========================================
+function switchLoginTab(tab, btn) {
+document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+btn.classList.add('active');
+
+document.querySelectorAll('.login-form').forEach(f => f.classList.remove('active'));
+if (tab === 'email') {
+document.getElementById('emailLoginForm').classList.add('active');
+} else {
+document.getElementById('googleLoginForm').classList.add('active');
+}
+
+// Clear error
+document.getElementById('loginError').style.display = 'none';
+}
+
+function togglePassword(inputId, btn) {
+const input = document.getElementById(inputId);
+const icon = btn.querySelector('i');
+if (input.type === 'password') {
+input.type = 'text';
+icon.classList.remove('fa-eye');
+icon.classList.add('fa-eye-slash');
+} else {
+input.type = 'password';
+icon.classList.remove('fa-eye-slash');
+icon.classList.add('fa-eye');
+}
+}
+
+// ==========================================
+// EMAIL/PASSWORD LOGIN
+// ==========================================
+async function handleEmailLogin() {
+const email = document.getElementById('loginEmail').value.trim();
+const password = document.getElementById('loginPassword').value;
+const btn = document.getElementById('btnEmailLogin');
+
+if (!email || !password) {
+showLoginError('Email dan password wajib diisi!');
+return;
+}
+
+if (!isFirebaseConfigured) {
+// Demo mode - check local users
+const user = appData.users.find(u => u.email === email && u.password === password);
+if (!user) {
+showLoginError('Email atau password salah!');
+return;
+}
+
+if (user.role === 'pending') {
+document.getElementById('pendingApproval').style.display = 'block';
+document.getElementById('emailLoginForm').style.display = 'none';
+return;
+}
+
+currentUser = { uid: user.id, email: user.email };
+currentUserData = user;
+showApp();
+showToast('Login berhasil!', 'success');
+return;
+}
+
+// Firebase mode
+btn.disabled = true;
+btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+try {
+const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+const result = await auth.signInWithCredential(credential);
+// Auth state listener akan handle sisanya
+} catch (error) {
+console.error('Email login error:', error);
+let errorMsg = 'Login gagal';
+if (error.code === 'auth/user-not-found') errorMsg = 'Email tidak terdaftar';
+else if (error.code === 'auth/wrong-password') errorMsg = 'Password salah';
+else if (error.code === 'auth/invalid-email') errorMsg = 'Format email tidak valid';
+else if (error.code === 'auth/invalid-credential') errorMsg = 'Email atau password salah';
+else errorMsg = error.message;
+
+showLoginError(errorMsg);
+btn.disabled = false;
+btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk';
+}
+}
+
+// ==========================================
+// GOOGLE LOGIN
+// ==========================================
+async function handleGoogleLogin() {
+if (!isFirebaseConfigured) {
+showLoginError('Firebase belum dikonfigurasi. Gunakan login email untuk demo.');
+return;
+}
+
+try {
+const provider = new firebase.auth.GoogleAuthProvider();
+const result = await auth.signInWithPopup(provider);
+const user = result.user;
+
+if (!user.email.endsWith('@' + ALLOWED_DOMAIN) && !user.email.endsWith('@' + ADMIN_DOMAIN)) {
+await auth.signOut();
+showLoginError('Hanya email @smp.belajar.id atau @admin.smp.belajar.id yang diperbolehkan!');
+return;
+}
+// Auth state listener akan handle sisanya
+} catch (error) {
+console.error('Google login error:', error);
+showLoginError('Login Google gagal: ' + error.message);
+}
+}
+
+// ==========================================
+// INITIALIZATION
 // ==========================================
 function initializeApp() {
 console.log('🚀 Initializing app...');
 console.log('Firebase configured:', isFirebaseConfigured);
 
-// Load demo data jika mode demo
 if (isDemoMode) {
 loadDemoData();
 console.log('Demo mode - data loaded');
@@ -439,12 +621,15 @@ showConfigError();
 return;
 }
 
-// Jika Firebase sudah dikonfigurasi, inisialisasi Firebase
 try {
 console.log('Initializing Firebase...');
 firebaseApp = firebase.initializeApp(firebaseConfig);
 auth = firebase.auth();
 db = firebase.firestore();
+
+// Enable Email/Password provider
+// (sudah otomatis aktif di Firebase Console)
+
 console.log('Firebase initialized successfully');
 setupAuthListener();
 } catch (error) {
@@ -492,14 +677,27 @@ console.log('Entering demo mode...');
 isDemoMode = true;
 loadDemoData();
 hideLoading();
-currentUser = { uid: 'demo-superadmin', email: SUPER_ADMIN_EMAIL };
-currentUserData = {
-uid: 'demo-superadmin', email: SUPER_ADMIN_EMAIL,
-nama: 'Super Admin (Demo)', role: 'superadmin',
-photoURL: '', kelas: null, mapel: null
-};
-showApp();
-showToast('Mode Demo aktif! Data tersimpan di browser.', 'warning');
+
+// Create demo admin user
+if (!appData.users.find(u => u.email === SUPER_ADMIN_EMAIL)) {
+appData.users.push({
+id: 'demo-superadmin',
+email: SUPER_ADMIN_EMAIL,
+password: 'admin123',
+nama: 'Super Admin (Demo)',
+role: 'superadmin',
+photoURL: '',
+kelas: null,
+mapel: null
+});
+saveDemoData();
+}
+
+// Show email login form with demo credentials
+document.getElementById('loginEmail').value = SUPER_ADMIN_EMAIL;
+document.getElementById('loginPassword').value = 'admin123';
+
+showToast('Mode Demo aktif! Login dengan email & password demo.', 'warning');
 }
 
 function setupAuthListener() {
@@ -536,6 +734,8 @@ currentUserData = userDoc.data();
 if (currentUserData.role === 'pending') {
 document.getElementById('loginPage').classList.add('active');
 document.getElementById('pendingApproval').style.display = 'block';
+document.getElementById('emailLoginForm').style.display = 'none';
+document.getElementById('googleLoginForm').style.display = 'none';
 return;
 }
 if (currentUserData.role === 'rejected') {
@@ -555,6 +755,11 @@ currentUserData = null;
 document.getElementById('loginPage').classList.add('active');
 document.getElementById('appContainer').classList.remove('active');
 document.getElementById('pendingApproval').style.display = 'none';
+// Reset login forms
+document.getElementById('emailLoginForm').style.display = 'block';
+document.getElementById('googleLoginForm').style.display = 'block';
+document.getElementById('loginEmail').value = '';
+document.getElementById('loginPassword').value = '';
 }
 });
 }
@@ -567,28 +772,8 @@ setTimeout(() => el.style.display = 'none', 5000);
 }
 
 // ==========================================
-// AUTH
+// LOGOUT
 // ==========================================
-async function handleGoogleLogin() {
-if (isDemoMode || !auth) {
-showToast('Firebase belum dikonfigurasi. Gunakan Mode Demo.', 'error');
-return;
-}
-try {
-const provider = new firebase.auth.GoogleAuthProvider();
-const result = await auth.signInWithPopup(provider);
-const user = result.user;
-if (!user.email.endsWith('@' + ALLOWED_DOMAIN) && !user.email.endsWith('@' + ADMIN_DOMAIN)) {
-await auth.signOut();
-showLoginError('Hanya email @smp.belajar.id atau @admin.smp.belajar.id yang diperbolehkan!');
-return;
-}
-} catch (error) {
-console.error('Login error:', error);
-showLoginError('Login gagal: ' + error.message);
-}
-}
-
 async function handleLogout() {
 try {
 unsubscribers.forEach(u => u && u());
@@ -1014,7 +1199,7 @@ showToast('OK', 'success'); closeModal();
 
 async function deleteGuru(id) {
 if (!confirm('Hapus guru ini?')) return;
-if (isDemoMode) { appData.guru = appData.guru.filter(g => g.id !== id); saveDemoData(); renderGuruTable(); showToast('Dihapus', 'success'); return; }
+if (isDemoMode) { appData.guru = appData.guru.filter(g => g.id !== id); saveDemoData(); renderGuruTable(); return; }
 await db.collection('guru').doc(id).delete();
 showToast('Dihapus', 'success');
 }
@@ -1053,7 +1238,7 @@ input.click();
 }
 
 // ==========================================
-// MASTER DATA - SISWA
+// SISWA
 // ==========================================
 function renderSiswa(c) {
 c.innerHTML = `<div class="card"><div class="card-header">
@@ -1142,7 +1327,7 @@ showToast('OK', 'success'); closeModal();
 
 async function deleteSiswa(id) {
 if (!confirm('Hapus siswa ini?')) return;
-if (isDemoMode) { appData.siswa = appData.siswa.filter(s => s.id !== id); saveDemoData(); renderSiswaTable(); showToast('Dihapus', 'success'); return; }
+if (isDemoMode) { appData.siswa = appData.siswa.filter(s => s.id !== id); saveDemoData(); renderSiswaTable(); return; }
 await db.collection('siswa').doc(id).delete();
 showToast('Dihapus', 'success');
 }
@@ -2627,7 +2812,7 @@ if (isDemoMode) { const idx = appData.users.findIndex(u => u.uid === id); if (id
 await db.collection('users').doc(id).update(data);
 showToast('Diperbarui!', 'success');
 } else {
-showToast('User baru harus login dengan Google dulu, lalu di-approve.', 'info');
+showToast('User baru harus login dengan Google/Email dulu, lalu di-approve.', 'info');
 }
 closeModal();
 }
@@ -2922,7 +3107,7 @@ reader.readAsText(file);
 window.addEventListener('beforeunload', () => { if (html5QrCode) html5QrCode.stop().catch(() => {}); });
 
 // ==========================================
-// START APP - PASTI BERJALAN
+// START APP
 // ==========================================
 initializeApp();
 
